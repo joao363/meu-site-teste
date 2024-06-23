@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Satisfação NIR</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Poppins:wght@400;500&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: linear-gradient(to right, rgb(219, 152, 8), rgb(126, 219, 157));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+        .title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-family: 'Merriweather', serif;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-family: 'Merriweather', serif;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-family: 'Merriweather', serif;
+        }
+        .rating {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .rating button {
+            width: 18%;
+            padding: 10px;
+            font-size: 14px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+        }
+        .rating button.muito-insatisfeito {
+            background-color: #d9534f; 
+        }
+        .rating button.pouco-insatisfeito {
+            background-color: #f0ad4e; 
+        }
+        .rating button.neutro {
+            background-color: #f7f7f7; 
+            color: black;
+        }
+        .rating button.pouco-satisfeito {
+            background-color: #5bc0de; 
+        }
+        .rating button.muito-satisfeito {
+            background-color: #5cb85c; 
+        }
+        .rating button.selected {
+            border: 2px solid #000; 
+            transform: scale(1.1);
+        }
+        .rating button:hover {
+            opacity: 0.9;
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .submit-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+        .submit-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">FORMULÁRIO DE SATISFAÇÃO NIR</div>
+        
+        <form id="satisfaction-form">
+            <div class="input-group">
+                <label for="entrevistado">Nome do Entrevistado:</label>
+                <input type="text" id="entrevistado" name="entrevistado">
+            </div>
+            
+            <div class="input-group">
+                <label for="entrevistador">Nome do Entrevistador(a):</label>
+                <input type="text" id="entrevistador" name="entrevistador">
+            </div>
+            
+            <div class="form-group">
+                <label>Qual seu nível de satisfação em relação ao atendimento na recepção?</label>
+                <br>
+                <div class="rating" id="rating-recepcao">
+                    <button type="button" class="muito-insatisfeito" onclick="setSatisfaction('recepcao', 'Muito Insatisfeito', this)">Muito Insatisfeito</button>
+                    <button type="button" class="pouco-insatisfeito" onclick="setSatisfaction('recepcao', 'Pouco Insatisfeito', this)">Pouco Insatisfeito</button>
+                    <button type="button" class="pouco-satisfeito" onclick="setSatisfaction('recepcao', 'Pouco Satisfeito', this)">Pouco Satisfeito</button>
+                    <button type="button" class="muito-satisfeito" onclick="setSatisfaction('recepcao', 'Muito Satisfeito', this)">Muito Satisfeito</button>
+                </div>
+                <input type="hidden" id="recepcao" name="recepcao">
+            </div>
+            

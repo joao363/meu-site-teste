@@ -39,7 +39,8 @@
             font-weight: bold;
             font-family: 'Merriweather', serif;
         }
-        .input-group input {
+        .input-group input,
+        .input-group textarea {
             width: 100%;
             padding: 8px;
             box-sizing: border-box;
@@ -54,53 +55,47 @@
             font-weight: bold;
             font-family: 'Merriweather', serif;
         }
-        .rating {
+        .image-rating {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-top: 10px;
         }
-        .rating button {
-            width: 18%;
-            padding: 10px;
-            font-size: 14px;
-            color: white;
-            border: none;
-            border-radius: 5px;
+        .image-option {
+            display: flex;
+            align-items: center;
             cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+            transition: transform 0.3s ease;
+            border-radius: 50%;
+            position: relative;
         }
-        .rating button.muito-insatisfeito {
-            background-color: #d9534f; 
+        .image-option img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+            border-radius: 50%;
         }
-        .rating button.pouco-insatisfeito {
-            background-color: #f0ad4e; 
+        .image-option.selected span {
+            position: relative;
         }
-        .rating button.neutro {
-            background-color: #f7f7f7; 
-            color: black;
+        .image-option.selected span::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid green;
+            border-radius: 50%;
         }
-        .rating button.pouco-satisfeito {
-            background-color: #5bc0de; 
-        }
-        .rating button.muito-satisfeito {
-            background-color: #5cb85c; 
-        }
-        .rating button.selected {
-            border: 2px solid #000; 
+        .image-option:hover {
             transform: scale(1.1);
-        }
-        .rating button:hover {
-            opacity: 0.9;
-            transform: scale(1.2);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
         .submit-button {
             display: block;
             width: 100%;
             padding: 10px;
-            background-color: #4CAF50;
+            background-color: #158bda;
             color: white;
             border: none;
             border-radius: 5px;
@@ -111,7 +106,7 @@
             font-family: 'Poppins', sans-serif;
         }
         .submit-button:hover {
-            background-color: #45a049;
+            background-color: #3e5c3f;
         }
     </style>
 </head>
@@ -121,24 +116,120 @@
         
         <form id="satisfaction-form">
             <div class="input-group">
-                <label for="entrevistado">Nome do Entrevistado:</label>
-                <input type="text" id="entrevistado" name="entrevistado">
+                <label for="entrevistado">NOME DO PACIENTE:</label>
+                <input type="text" id="entrevistado" name="entrevistado" required>
             </div>
             
             <div class="input-group">
-                <label for="entrevistador">Nome do Entrevistador(a):</label>
-                <input type="text" id="entrevistador" name="entrevistador">
+                <label for="entrevistador">NOME DO ENTREVISTADOR:</label>
+                <input type="text" id="entrevistador" name="entrevistador" required>
             </div>
             
             <div class="form-group">
                 <label>Qual seu nível de satisfação em relação ao atendimento na recepção?</label>
-                <br>
-                <div class="rating" id="rating-recepcao">
-                    <button type="button" class="muito-insatisfeito" onclick="setSatisfaction('recepcao', 'Muito Insatisfeito', this)">Muito Insatisfeito</button>
-                    <button type="button" class="pouco-insatisfeito" onclick="setSatisfaction('recepcao', 'Pouco Insatisfeito', this)">Pouco Insatisfeito</button>
-                    <button type="button" class="pouco-satisfeito" onclick="setSatisfaction('recepcao', 'Pouco Satisfeito', this)">Pouco Satisfeito</button>
-                    <button type="button" class="muito-satisfeito" onclick="setSatisfaction('recepcao', 'Muito Satisfeito', this)">Muito Satisfeito</button>
+                <div class="image-rating" id="image-rating-recepcao">
+                    <div class="image-option" onclick="setImageSatisfaction('recepcao', 'Muito Insatisfeito', this)">
+                        <img src="img/MuitoInstisfeito.png" alt="Muito Insatisfeito">
+                        <span>Muito Insatisfeito</span>
+                    </div>
+                    <div class="image-option" onclick="setImageSatisfaction('recepcao', 'Pouco Insatisfeito', this)">
+                        <img src="img/PoucoInsatisfeito.png" alt="Pouco Insatisfeito">
+                        <span>Pouco Insatisfeito</span>
+                    </div>
+                    <div class="image-option" onclick="setImageSatisfaction('recepcao', 'Pouco Satisfeito', this)">
+                        <img src="img/PoucoSatisfeito.png" alt="Pouco Satisfeito">
+                        <span>Pouco Satisfeito</span>
+                    </div>
+                    <div class="image-option" onclick="setImageSatisfaction('recepcao', 'Muito Satisfeito', this)">
+                        <img src="img/MuitoSatisfeito.png" alt="Muito Satisfeito">
+                        <span>Muito Satisfeito</span>
+                    </div>
                 </div>
                 <input type="hidden" id="recepcao" name="recepcao">
             </div>
+            <br>
+            <div class="form-group">
+                <label>Qual seu nível de satisfação em relação ao quarto que permaneceu internado?</label>
+                <div class="image-rating" id="image-rating-quarto">
+                    <div class="image-option" onclick="setImageSatisfaction('quarto', 'Muito Insatisfeito', this)">
+                        <img src="img/MuitoInstisfeito.png" alt="Muito Insatisfeito">
+                        <span>Muito Insatisfeito</span>
+                    </div>
+                    <div class="image-option" onclick="setImageSatisfaction('quarto', 'Pouco Insatisfeito', this)">
+                        <img src="img/PoucoInsatisfeito.png" alt="Pouco Insatisfeito">
+                        <span>Pouco Insatisfeito</span>
+                    </div>
+                    <div class="image-option" onclick="setImageSatisfaction('quarto', 'Pouco Satisfeito', this)">
+                        <img src="img/PoucoSatisfeito.png" alt="Pouco Satisfeito">
+                        <span>Pouco Satisfeito</span>
+                    </div>
+                    <div class="image-option" onclick="setImageSatisfaction('quarto', 'Muito Satisfeito', this)">
+                        <img src="img/MuitoSatisfeito.png" alt="Muito Satisfeito">
+                        <span>Muito Satisfeito</span>
+                    </div>
+                </div>
+                <input type="hidden" id="quarto" name="quarto">
+            </div>
+            <br>
+            <div class="form-group">
+                <label>Qual seu nível de satisfação geral?</label>
+                <div class="image-rating" id="image-rating-geral">
+                    <div class="image-option" onclick="setImageSatisfaction('geral', 'Muito Insatisfeito', this)">
+                        <img src="img/MuitoInstisfeito.png" alt="Muito Insatisfeito">
+                        <span>Muito Insatisfeito</span>
+                    </div>
+                    <div class="image-option" onclick="setImageSatisfaction('geral', 'Pouco Insatisfeito', this)">
+                        <img src="img/PoucoInsatisfeito.png" alt="Pouco Insatisfeito">
+                        <span>Pouco Insatisfeito</span>
+                    </div>
+                    <div class="image-option" onclick="setImageSatisfaction('geral', 'Pouco Satisfeito', this)">
+                        <img src="img/PoucoSatisfeito.png" alt="Pouco Satisfeito">
+                        <span>Pouco Satisfeito</span>
+                    </div>
+                    <div class="image-option" onclick="setImageSatisfaction('geral', 'Muito Satisfeito', this)">
+                        <img src="img/MuitoSatisfeito.png" alt="Muito Satisfeito">
+                        <span>Muito Satisfeito</span>
+                    </div>
+                </div>
+                <input type="hidden" id="geral" name="geral">
+            </div>
             
+            <div class="input-group">
+                <label for="observacoes">Observações:</label>
+                <input type="text" id="observacoes" name="observacoes">                
+            </div>
+
+            <button class="submit-button" type="submit">ENVIAR</button>
+        </form>
+    </div>
+
+    <script>
+        function setImageSatisfaction(field, value, element) {
+            document.getElementById(field).value = value;
+            
+            var options = element.parentNode.getElementsByClassName('image-option');
+            for (var i = 0; i < options.length; i++) {
+                options[i].classList.remove('selected');
+            }
+            element.classList.add('selected');
+        }
+
+        document.getElementById('satisfaction-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    var formData = new FormData(this);
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://script.google.com/macros/s/AKfycbxBbfxUvATLKYVD305m6YhfKACNfoC-PYsWFz6X9hvq0FH8pReUP0oZXlJJ7Pa1z46zEg/exec', true);
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            alert('Dados salvos com sucesso!');
+            document.getElementById('satisfaction-form').reset();
+        }
+    };
+    xhr.send(formData);
+});
+
+    </script>
+</body>
+</html>
